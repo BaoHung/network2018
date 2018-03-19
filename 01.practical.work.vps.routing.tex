@@ -1,0 +1,31 @@
+\documentclass{article}
+\begin{document}
+Practical Work 1: VPS Setup \& Routing\\ 
+\\ 
+bh@bh:\~\$ ping usth.edu.vn\\ 
+PING usth.edu.vn (104.27.160.15) 56(84) bytes of data.\\ 
+64 bytes from 104.27.160.15: icmp\_seq=1 ttl=54 time=23.6 ms\\ 
+64 bytes from 104.27.160.15: icmp\_seq=2 ttl=54 time=29.4 ms\\ 
+64 bytes from 104.27.160.15: icmp\_seq=3 ttl=54 time=33.4 ms\\ 
+64 bytes from 104.27.160.15: icmp\_seq=4 ttl=54 time=24.3 ms\\ 
+64 bytes from 104.27.160.15: icmp\_seq=5 ttl=54 time=46.8 ms\\ 
+\^C\\ 
+--- usth.edu.vn ping statistics ---\\ 
+5 packets transmitted, 5 received, 0\% packet loss, time 4004ms\\ 
+rtt min/avg/max/mdev = 23.621/31.547/46.881/8.463 ms\\ 
+\\ 
+\\ 
+bh@bh:\~\$ traceroute usth.edu.vn\\ 
+traceroute to usth.edu.vn (104.27.161.15), 30 hops max, 60 byte packets\\ 
+ 1  192.168.10.10 (192.168.10.10)  24.142 ms  24.098 ms  24.103 ms\\ 
+ 2  ci96.120-46.netnam.vn (101.96.120.46)  359.566 ms  359.553 ms  359.613 ms\\ 
+ 3  static.netnam.vn (119.17.219.78)  359.618 ms  360.222 ms static.netnam.vn (119.17.219.74)  360.255 ms\\ 
+ 4  static.netnam.vn (119.17.219.17)  360.106 ms static.netnam.vn (119.17.219.13)  360.096 ms static.netnam.vn (119.17.219.17)  360.141 ms\\ 
+ 5  static.netnam.vn (119.17.219.10)  361.171 ms 203.113.156.25 (203.113.156.25)  367.207 ms static.netnam.vn (119.17.219.10)  367.003 ms\\ 
+ 6  localhost (27.68.229.9)  415.739 ms  428.970 ms static.netnam.vn (119.17.219.17)  395.145 ms\\ 
+ 7  localhost (27.68.240.54)  453.969 ms localhost (27.68.240.98)  68.286 ms 203.113.156.25 (203.113.156.25)  2.787 ms\\ 
+ 8  13335.hkg.equinix.com (119.27.63.48)  23.880 ms localhost (27.68.229.49)  74.705 ms localhost (27.68.229.9)  66.393 ms\\ 
+ 9  104.27.161.15 (104.27.161.15)  26.474 ms localhost (27.68.240.54)  94.601 ms 104.27.161.15 (104.27.161.15)  23.643 ms\\ 
+\\
+ There are 9 hops.\\ 
+\end{document}
