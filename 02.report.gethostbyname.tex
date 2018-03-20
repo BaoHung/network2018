@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{listings}
+\lstset{breaklines=true} 
+\begin{document}
+Practical Work 2: gethostbyname()\\
+\textbf{./a.out google.com yahoo.com usth.edu.vn}
+
+\textbf{Local Machine}
+\begin{lstlisting}
+bh@bh:/media/bh/Linux Stuff/Dropbox/USTH/M1/MI2.01 - System Architectures/Network/exercises/network2018$ ./a.out google.com yahoo.com usth.edu.vn
+IP addresses for google.com: 
+216.58.221.110
+------------------
+IP addresses for yahoo.com: 
+98.137.246.7
+98.138.219.232
+72.30.35.10
+72.30.35.9
+98.138.219.231
+98.137.246.8
+------------------
+IP addresses for usth.edu.vn: 
+104.27.161.15
+104.27.160.15
+------------------
+\end{lstlisting}
+
+\textbf{On VPS}
+\begin{lstlisting}
+bh@instance-1:~/source/network2018$ ./a.out google.com yahoo.com usth.edu.vn
+IP addresses for google.com: 
+172.217.194.113
+172.217.194.100
+172.217.194.101
+172.217.194.139
+172.217.194.102
+172.217.194.138
+------------------
+IP addresses for yahoo.com: 
+72.30.35.9
+98.138.219.231
+72.30.35.10
+98.138.219.232
+98.137.246.8
+98.137.246.7
+------------------
+IP addresses for usth.edu.vn: 
+104.27.160.15
+104.27.161.15
+------------------
+\end{lstlisting}
+
+\textbf{Explaination}\\
+There are many DNS servers on the globe. Each server may contain different information of the mapping between domain name and IP address.\\
+When a client ask for domain name resolution, the closest DNS server (if there is no preferences) returns the results. This leads to the differences of results between local machine and VPS server.
+\end{document}
