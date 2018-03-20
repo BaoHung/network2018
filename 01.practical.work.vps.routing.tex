@@ -1,31 +1,50 @@
 \documentclass{article}
+\usepackage{listings}
+\lstset{breaklines=true} 
 \begin{document}
-Practical Work 1: VPS Setup \& Routing\\ 
-\\ 
-bh@bh:\~\$ ping usth.edu.vn\\ 
-PING usth.edu.vn (104.27.160.15) 56(84) bytes of data.\\ 
-64 bytes from 104.27.160.15: icmp\_seq=1 ttl=54 time=23.6 ms\\ 
-64 bytes from 104.27.160.15: icmp\_seq=2 ttl=54 time=29.4 ms\\ 
-64 bytes from 104.27.160.15: icmp\_seq=3 ttl=54 time=33.4 ms\\ 
-64 bytes from 104.27.160.15: icmp\_seq=4 ttl=54 time=24.3 ms\\ 
-64 bytes from 104.27.160.15: icmp\_seq=5 ttl=54 time=46.8 ms\\ 
-\^C\\ 
---- usth.edu.vn ping statistics ---\\ 
-5 packets transmitted, 5 received, 0\% packet loss, time 4004ms\\ 
-rtt min/avg/max/mdev = 23.621/31.547/46.881/8.463 ms\\ 
-\\ 
-\\ 
-bh@bh:\~\$ traceroute usth.edu.vn\\ 
-traceroute to usth.edu.vn (104.27.161.15), 30 hops max, 60 byte packets\\ 
- 1  192.168.10.10 (192.168.10.10)  24.142 ms  24.098 ms  24.103 ms\\ 
- 2  ci96.120-46.netnam.vn (101.96.120.46)  359.566 ms  359.553 ms  359.613 ms\\ 
- 3  static.netnam.vn (119.17.219.78)  359.618 ms  360.222 ms static.netnam.vn (119.17.219.74)  360.255 ms\\ 
- 4  static.netnam.vn (119.17.219.17)  360.106 ms static.netnam.vn (119.17.219.13)  360.096 ms static.netnam.vn (119.17.219.17)  360.141 ms\\ 
- 5  static.netnam.vn (119.17.219.10)  361.171 ms 203.113.156.25 (203.113.156.25)  367.207 ms static.netnam.vn (119.17.219.10)  367.003 ms\\ 
- 6  localhost (27.68.229.9)  415.739 ms  428.970 ms static.netnam.vn (119.17.219.17)  395.145 ms\\ 
- 7  localhost (27.68.240.54)  453.969 ms localhost (27.68.240.98)  68.286 ms 203.113.156.25 (203.113.156.25)  2.787 ms\\ 
- 8  13335.hkg.equinix.com (119.27.63.48)  23.880 ms localhost (27.68.229.49)  74.705 ms localhost (27.68.229.9)  66.393 ms\\ 
- 9  104.27.161.15 (104.27.161.15)  26.474 ms localhost (27.68.240.54)  94.601 ms 104.27.161.15 (104.27.161.15)  23.643 ms\\ 
+Practical Work 1: VPS Setup \& Routing
 \\
- There are 9 hops.\\ 
+\par
+\textbf{ping usth.edu.vn from VPS}
+\begin{lstlisting}
+bh@instance-1:~$ ping usth.edu.vn
+PING usth.edu.vn (104.27.160.15) 56(84) bytes of data.
+64 bytes from 104.27.160.15: icmp_seq=1 ttl=55 time=53.0 ms
+64 bytes from 104.27.160.15: icmp_seq=2 ttl=55 time=52.7 ms
+64 bytes from 104.27.160.15: icmp_seq=3 ttl=55 time=52.7 ms
+64 bytes from 104.27.160.15: icmp_seq=4 ttl=55 time=52.7 ms
+64 bytes from 104.27.160.15: icmp_seq=5 ttl=55 time=52.8 ms
+^C
+--- usth.edu.vn ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 52.768/52.852/53.094/0.190 ms
+\end{lstlisting}
+
+\par
+\textbf{traceroute usth.edu.vn from VPS}
+\begin{lstlisting}
+bh@instance-1:~$ traceroute usth.edu.vn
+traceroute to usth.edu.vn (104.27.160.15), 30 hops max, 60 byte packets
+ 1  66.249.94.69 (66.249.94.69)  52.833 ms  52.808 ms 64.233.175.143 (64.233.175.143)  52.810 ms
+ 2  108.170.229.234 (108.170.229.234)  52.299 ms 108.170.236.252 (108.170.236.252)  51.640 ms 108.170.229.234 (108.170.229.234)  51.047 ms
+ 3  108.170.244.134 (108.170.244.134)  51.857 ms 108.170.244.38 (108.170.244.38)  51.764 ms 108.170.244.70 (108.170.244.70)  51.938 ms
+ 4  39-222-163-203-static.chief.net.tw (203.163.222.39)  51.774 ms  52.749 ms  51.753 ms
+ 5  104.27.160.15 (104.27.160.15)  51.917 ms  51.910 ms  52.968 ms
+\end{lstlisting}
+There are 5 hops when tracerouting from VPS.
+\\
+\par
+\textbf{traceroute usth.edu.vn from local machine}
+\begin{lstlisting}
+bh@bh:~/.ssh$ traceroute usth.edu.vn
+traceroute to usth.edu.vn (104.27.161.15), 30 hops max, 60 byte packets
+ 1  192.168.1.1 (192.168.1.1)  1.335 ms  3.554 ms  4.155 ms
+ 2  125.235.243.172.adsl.viettel.vn (125.235.243.172)  6.202 ms  6.956 ms  7.524 ms
+ 3  125.235.243.5.adsl.viettel.vn (125.235.243.5)  8.172 ms 125.235.243.34.adsl.viettel.vn (125.235.243.34)  8.781 ms 125.235.243.5.adsl.viettel.vn (125.235.243.5)  9.406 ms
+ 4  localhost (27.68.229.53)  47.614 ms localhost (27.68.229.13)  44.035 ms localhost (27.68.229.9)  32.918 ms
+ 5  localhost (27.68.240.54)  40.399 ms  41.129 ms localhost (27.68.240.94)  29.817 ms
+ 6  13335.hkg.equinix.com (119.27.63.48)  41.937 ms  40.133 ms  39.249 ms
+ 7  104.27.161.15 (104.27.161.15)  43.548 ms  42.745 ms  47.877 ms
+\end{lstlisting}
+There are 7 hops when tracerouting from local machine.
 \end{document}
