@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 int main(int argc, char **argv)
 {
@@ -47,6 +48,7 @@ int main(int argc, char **argv)
         else
         {
             printf("Connection accepted... %d\n", countConnection);
+            close(clientfd);
         }
     }
     return 0;
