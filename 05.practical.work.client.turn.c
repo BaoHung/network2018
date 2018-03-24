@@ -53,7 +53,7 @@ int main(int argc, char **argv)
             {
                 printf("Client: ");
                 scanf("%s", sendMsg);
-                send(sockfd, sendMsg, sizeof(sendMsg), 0);
+                send(sockfd, sendMsg, strlen(sendMsg), 0);
                 recv(sockfd, recvMsg, sizeof(recvMsg), 0);
                 printf("\nServer said: %s\n", recvMsg);
             }

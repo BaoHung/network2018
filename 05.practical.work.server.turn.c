@@ -55,7 +55,7 @@ int main(int argc, char **argv)
             printf("\nClient said: %s\n", recvMsg);
             printf("Server: ");
             scanf("%s", sendMsg);
-            send(clientfd, sendMsg, sizeof(sendMsg), 0);
+            send(clientfd, sendMsg, strlen(sendMsg), 0);
         }
         // close(clientfd);
     }
