@@ -10,7 +10,6 @@
 
 #define MAX_CLIENT 100
 
-// int clientfds[100]; // Global variable for input function and main
 void *stdInput(void *fds)
 {
     int *clientfds = (int *)fds;
@@ -19,7 +18,6 @@ void *stdInput(void *fds)
     {
         printf("Server: ");
         scanf("%s", msg);
-        // printf("\n");
         for (int i = 0; i < MAX_CLIENT; i++)
         {
             if (clientfds[i] > 0)
@@ -97,8 +95,6 @@ int main(int argc, char **argv)
     int waitCount = 0;
     while (1)
     {
-        // printf("Waiting connection!\n");
-
         // Non blocking client
         int fl = fcntl(sockfd, F_GETFL, 0);
         fl |= O_NONBLOCK;

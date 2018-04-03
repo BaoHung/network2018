@@ -13,7 +13,6 @@ void *stdInput(void *sockfd)
     {
         printf("Client: ");
         scanf("%s", msg);
-        // printf("\n");
         if (fd > 0)
         {
             send(fd, msg, strlen(msg), 0);
@@ -94,9 +93,6 @@ int main(int argc, char **argv)
                     printf("Server: %s\n", msg);
                 }
                 memset(&msg, 0, sizeof(msg));
-                // printf("Client: ");
-                // scanf("%s", msg);
-                // send(sockfd, msg, strlen(msg), 0);
             }
         }
     }
