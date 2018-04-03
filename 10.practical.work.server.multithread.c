@@ -6,8 +6,29 @@
 #include <fcntl.h>
 #include <poll.h>
 #include <sys/select.h>
+#include <pthread.h>
 
 #define MAX_CLIENT 100
+
+// int clientfds[100]; // Global variable for input function and main
+void *stdInput(void *fds)
+{
+    int *clientfds = (int *)fds;
+    char msg[50];
+    while (1)
+    {
+        printf("Server: ");
+        scanf("%s", msg);
+        // printf("\n");
+        for (int i = 0; i < MAX_CLIENT; i++)
+        {
+            if (clientfds[i] > 0)
+            {
+                send(clientfds[i], msg, strlen(msg), 0);
+            }
+        }
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -67,11 +88,16 @@ int main(int argc, char **argv)
     clen = sizeof(caddr);
 #pragma endregion
 
+#pragma region Add thread for standard input
+    pthread_t inputThread;
+    pthread_create(&inputThread, NULL, stdInput, &clientfds);
+#pragma endregion
+
 #pragma region Accepting connection
     int waitCount = 0;
     while (1)
     {
-        printf("Waiting connection!\n");
+        // printf("Waiting connection!\n");
 
         // Non blocking client
         int fl = fcntl(sockfd, F_GETFL, 0);
@@ -128,17 +154,17 @@ int main(int argc, char **argv)
         {
             if (clientfds[i] > 0 && FD_ISSET(clientfds[i], &set))
             {
-                memset(msg, 0, sizeof(msg));
                 if (read(clientfds[i], msg, sizeof(msg)) > 0)
                 {
-                    printf("client %d says: %s\nserver>", clientfds[i], msg);
+                    printf("Client %d: %s\n", clientfds[i], msg);
                 }
                 else
                 {
                     // some error. remove it from the "active" fd array
-                    printf("client %d has disconnected.\n", clientfds[i]);
+                    printf("Client %d has disconnected.\n", clientfds[i]);
                     clientfds[i] = 0;
                 }
+                memset(msg, 0, sizeof(msg));
             }
         }
 #pragma endregion
