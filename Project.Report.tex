@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{listings}
+\lstset{breaklines=true} 
+\begin{document}
+\textbf{Centralized Chat System}\\
+\textbf{NGUYEN Vu Bao Hung}\\
+\textbf{Introduction}\\
+In this project, I will develope a chat programme that acts as a chat room. One client can send message to and receive message from all other clients.\\
+The system works with non-blocking multiplex TCP socket.\\
+\textbf{The Client}\\
+The client programme is separated into 2 threads, one for handling input and one for displaying messages. This helps user to see new messages as they come and let them send message at any time.\\
+The main thread will continue to wait for incoming message.\\
+The input thread will wait for user input.\\
+The network thread will send the user input to server.\\
+The input thread and network thread are synchronized by a mutex such that once the input message is received, it is sent to server.\\
+
+\textbf{The Server}
+The requirement of the project is to use Fork and Pipe for each client. But I could do that properly so I have sent two version of servers, one works but do not use fork and pipe, one use fork and pipe but not working.\\
+
+Version 1\\
+This version works but do not use fork and pipe.\\
+All clients are managed by one process, once a message is received, it is sent to all other process.\\
+
+Version 2\\
+This version do not work but implement Fork and Pipe technique.\\
+Their will be a different child process for each client.\\
+Their are 2 pipes for each child-parent pair.\\
+The child process will read from Pipe 1 and write to pipe 2 which duplicates stdout.\\
+The parent process will write to Pipe 2 which duplicate stdin and read from Pipe 1.\\
+
+
+\begin{lstlisting}
+
+\end{lstlisting}
+
+\textbf{Explaination}\\
+\end{document}
