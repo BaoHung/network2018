@@ -105,7 +105,7 @@ int main(int argc, char **argv)
         // a «listening» socket?
         if (FD_ISSET(sockfd, &set))
         {
-            clientfd = accept(sockfd, (struct sockaddr *)&saddr, &clen);
+            clientfd = accept(sockfd, (struct sockaddr *)&caddr, &clen);
             // make it nonblocking
             fl = fcntl(clientfd, F_GETFL, 0);
             fl |= O_NONBLOCK;

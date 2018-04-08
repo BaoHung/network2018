@@ -17,7 +17,6 @@ void *stdInput()
     while (1)
     {
         pthread_mutex_lock(&mutex);
-        printf("Say something: ");
         scanf("%s", msg);
         pthread_cond_signal(&message);
         pthread_cond_wait(&message, &mutex);
@@ -111,6 +110,8 @@ int main(int argc, char **argv)
             pthread_t inputThread, networkThread;
             pthread_create(&inputThread, NULL, stdInput, NULL);
             pthread_create(&networkThread, NULL, network, &sockfd);
+            printf("Say something: ");
+            fflush(stdout);
 
             // Receiving and sending need to be in different threads
             char recvMsg[50];
@@ -118,7 +119,8 @@ int main(int argc, char **argv)
             {
                 while (recv(sockfd, recvMsg, sizeof(recvMsg), 0) > 0)
                 {
-                    printf("\n%s\n", recvMsg);
+                    printf("\n%s\n> ", recvMsg);
+                    fflush(stdout);
                 }
                 memset(&recvMsg, 0, sizeof(recvMsg));
             }
