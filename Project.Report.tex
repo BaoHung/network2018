@@ -37,7 +37,7 @@ All clients are managed by one process, once a message is received, it is sent t
 
 \textbf{Version 2: multi-process}\\
 In this version, the parent process handle new connections, the child processes receive and send message to each client.\\
-Their will be a different child process for each client.\\
+There will be a different child process for each client.\\
 There are 2 pipes for each child-parent pair.\\
 The child process will read from Pipe 1 and write to pipe 2.\\
 The parent process will write to Pipe 1 and read from Pipe 2.\\
